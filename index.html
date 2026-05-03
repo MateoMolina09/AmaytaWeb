@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amayta – Alta Gastronomía en Recoleta, Buenos Aires</title>
+  <meta name="description" content="Alta gastronomía en el corazón de un edificio patrimonial de Buenos Aires. Café de autor, pastelería artesanal, almuerzos, cenas y eventos memorables en Juncal y Quintana, Recoleta." />
+  <meta name="keywords" content="Amayta, restaurante Recoleta, pastelería artesanal Buenos Aires, café de autor, almuerzo cena Recoleta, eventos Buenos Aires, Juncal Quintana, edificio patrimonial" />
+  <meta property="og:title" content="Amayta – Alta Gastronomía en Recoleta, Buenos Aires" />
+  <meta property="og:description" content="Café de autor, pastelería artesanal, almuerzos, cenas y eventos en un edificio patrimonial de Buenos Aires." />
+  <meta property="og:image" content="Salón con sillas blancas y mesa larga (hero).jpg" />
+  <meta property="og:type" content="restaurant" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Sen:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════
+       TOKENS
+    ═══════════════════════════════ */
+    :root {
+      --blue:        #8ba0c1;
+      --blue-mid:    #7a91b5;
+      --blue-dark:   #5f7799;
+      --blue-deep:   #4a6080;
+      --teal:        #3c6f8d;
+      --teal-dark:   #305a74;
+      --cream:       #f5e4d5;
+      --cream-dim:   rgba(245,228,213,0.75);
+      --cream-faint: rgba(245,228,213,0.12);
+      --yellow:      #E8C547;
+      --yellow-dark: #c9a930;
+      --yellow-glow: rgba(232,197,71,0.18);
+      --wa-green:    #25D366;
+      --wa-dark:     #1aab52;
+
+      --ff-title: 'Cormorant Garamond', Georgia, serif;
+      --ff-body:  'Sen', Arial, sans-serif;
+
+      --max-w:        1200px;
+      --pad-v:        110px;
+      --pad-h:        48px;
+      --gap:          20px;
+      --radius:       2px;
+      --btn-radius:   10px;
+
+      --ease: cubic-bezier(.4,0,.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--ff-body);
+      background: var(--blue);
+      color: var(--cream);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    /* ═══════════════════════════════
+       REVEAL ANIMATIONS
+    ═══════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left  { opacity: 0; transform: translateX(-32px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+    .reveal-right { opacity: 0; transform: translateX(32px);  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+    .reveal-left.visible,
+    .reveal-right.visible { opacity: 1; transform: none; }
+
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+
+    /* ═══════════════════════════════
+       SHARED COMPONENTS
+    ═══════════════════════════════ */
+    .tag {
+      display: inline-block;
+      font-family: var(--ff-body);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .ornament {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .ornament::before,
+    .ornament::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(232,197,71,0.35);
+    }
+    .ornament-center {
+      justify-content: center;
+    }
+    .ornament-left::before { display: none; }
+    .ornament-left { justify-content: flex-start; }
+
+    .section-title {
+      font-family: var(--ff-title);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.12;
+      color: var(--cream);
+      letter-spacing: -0.01em;
+    }
+
+    .subtitle {
+      font-family: var(--ff-body);
+      font-size: 0.97rem;
+      color: var(--cream-dim);
+      line-height: 1.85;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: var(--yellow);
+      margin: 24px 0;
+    }
+    .divider-center { margin: 24px auto; }
+
+    /* ── Buttons ── */
+    .btn-yellow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--yellow);
+      color: #1a1200;
+      font-family: var(--ff-body);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border-radius: var(--btn-radius);
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    }
+    .btn-yellow::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.28) 50%, transparent 100%);
+      transform: translateX(-100%);
+      transition: transform 0.5s var(--ease);
+    }
+    .btn-yellow:hover::before { transform: translateX(100%); }
+    .btn-yellow:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 28px rgba(232,197,71,0.38);
+    }
+    .btn-yellow:active { transform: translateY(-1px) scale(1); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--cream);
+      font-family: var(--ff-body);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 13px 32px;
+      border-radius: var(--btn-radius);
+      border: 1.5px solid rgba(245,228,213,0.45);
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.35s var(--ease), border-color 0.35s var(--ease), transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    }
+    .btn-outline::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--cream);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s var(--ease);
+      z-index: 0;
+    }
+    .btn-outline span { position: relative; z-index: 1; }
+    .btn-outline:hover::before { transform: scaleX(1); }
+    .btn-outline:hover {
+      color: var(--teal-dark);
+      border-color: var(--cream);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+    }
+    .btn-outline:active { transform: translateY(-1px); }
+
+    /* WhatsApp button */
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--wa-green);
+      color: #fff;
+      font-family: var(--ff-body);
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border-radius: var(--btn-radius);
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), background 0.3s;
+    }
+    .btn-whatsapp::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.22) 50%, transparent 100%);
+      transform: translateX(-100%);
+      transition: transform 0.5s var(--ease);
+    }
+    .btn-whatsapp:hover::before { transform: translateX(100%); }
+    .btn-whatsapp:hover {
+      background: var(--wa-dark);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 32px rgba(37,211,102,0.35);
+    }
+    .btn-whatsapp:active { transform: translateY(-1px) scale(1); }
+    .btn-whatsapp svg { flex-shrink: 0; }
+
+    /* Photo frames */
+    .photo-frame {
+      overflow: hidden;
+      border-radius: var(--radius);
+    }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease);
+    }
+    .photo-frame:hover img { transform: scale(1.05); }
+
+    /* Section wrapper */
+    .section-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-h);
+    }
+
+    /* ═══════════════════════════════
+       NAVBAR
+    ═══════════════════════════════ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 48px;
+      background: rgba(44, 86, 112, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(245,228,213,0.1);
+      transition: background 0.4s var(--ease), padding 0.4s var(--ease), box-shadow 0.4s;
+    }
+    #navbar.scrolled {
+      background: rgba(40, 78, 102, 0.98);
+      padding: 14px 48px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+    }
+
+    #navbar .btn-yellow {
+      position: absolute;
+      right: 48px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--ff-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      opacity: 0.85;
+      position: relative;
+      transition: opacity 0.2s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1px;
+      background: var(--yellow);
+      transform: scaleX(0);
+      transition: transform 0.25s var(--ease);
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    /* ═══════════════════════════════
+       SECCIÓN 1 · HERO
+    ═══════════════════════════════ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 96px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+      transform: scale(1.04);
+      transition: transform 12s ease;
+    }
+    #hero:hover .hero-bg img { transform: scale(1); }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(74,96,128,0.55) 0%, transparent 60%),
+        linear-gradient(to top, rgba(60,82,112,0.9) 0%, rgba(60,82,112,0.2) 55%, transparent 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-h);
+      width: 100%;
+    }
+
+    .hero-address {
+      font-family: var(--ff-body);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: var(--ff-title);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(6rem, 17vw, 13rem);
+      line-height: 0.85;
+      color: var(--cream);
+      margin-bottom: 32px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-rule {
+      width: 60px;
+      height: 1px;
+      background: var(--yellow);
+      margin-bottom: 28px;
+      opacity: 0.8;
+    }
+
+    .hero-desc {
+      font-family: var(--ff-body);
+      font-size: 1rem;
+      color: var(--cream);
+      max-width: 500px;
+      line-height: 1.8;
+      margin-bottom: 44px;
+      opacity: 0.85;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      right: var(--pad-h);
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--ff-body);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,228,213,0.45);
+      writing-mode: vertical-rl;
+    }
+    .scroll-hint::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 50px;
+      background: rgba(245,228,213,0.25);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%,100% { opacity: 0.25; transform: scaleY(0.5) translateY(0); }
+      50% { opacity: 0.6; transform: scaleY(1) translateY(8px); }
+    }
+
+    /* ═══════════════════════════════
+       SECCIÓN 2 · HISTORIA
+    ═══════════════════════════════ */
+    #historia {
+      padding: var(--pad-v) 0;
+    }
+
+    .historia-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-h);
+      display: grid;
+      grid-template-columns: 55fr 45fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .historia-body p {
+      font-family: var(--ff-body);
+      font-size: 0.93rem;
+      color: var(--cream-dim);
+      line-height: 1.95;
+      margin-bottom: 18px;
+    }
+    .historia-body p:last-child { margin-bottom: 0; }
+    .historia-body em { font-style: italic; color: var(--cream); }
+
+    .historia-img {
+      aspect-ratio: 3/4;
+      position: relative;
+    }
+    .historia-img::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: -16px;
+      bottom: -16px;
+      border: 1px solid rgba(232,197,71,0.22);
+      border-radius: var(--radius);
+      z-index: 0;
+    }
+    .historia-img .photo-frame {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+    }
+
+    /* ═══════════════════════════════
+       SECCIÓN 3 · EXPERIENCIA
+    ═══════════════════════════════ */
+    #experiencia {
+      padding: var(--pad-v) 0;
+      background: var(--teal);
+      position: relative;
+      overflow: hidden;
+    }
+    #experiencia::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(245,228,213,0.15), transparent);
+    }
+    #experiencia::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(245,228,213,0.15), transparent);
+    }
+
+    .exp-header {
+      text-align: center;
+      margin-bottom: 68px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    .card {
+      background: rgba(245,228,213,0.05);
+      border: 1px solid rgba(245,228,213,0.1);
+      border-radius: 4px;
+      padding: 40px 28px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.35s var(--ease), transform 0.35s var(--ease), border-color 0.35s;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--yellow);
+      transform: scaleX(0);
+      transition: transform 0.35s var(--ease);
+      transform-origin: left;
+    }
+    .card:hover {
+      background: rgba(245,228,213,0.09);
+      transform: translateY(-6px);
+      border-color: rgba(245,228,213,0.2);
+    }
+    .card:hover::before { transform: scaleX(1); }
+
+    .card-num {
+      font-family: var(--ff-title);
+      font-style: italic;
+      font-size: 3rem;
+      font-weight: 300;
+      color: rgba(232,197,71,0.18);
+      line-height: 1;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .card-title {
+      font-family: var(--ff-title);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: var(--cream);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .card-text {
+      font-family: var(--ff-body);
+      font-size: 0.87rem;
+      color: var(--cream-dim);
+      line-height: 1.8;
+    }
+
+    .section-cta { text-align: center; }
+
+    /* ═══════════════════════════════
+       SECCIÓN 4 · DETALLES
+    ═══════════════════════════════ */
+    #detalles {
+      padding: var(--pad-v) 0;
+    }
+
+    .detalles-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-h);
+    }
+
+    .detalles-header {
+      margin-bottom: 52px;
+    }
+
+    .detalles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .detalle-frame {
+      aspect-ratio: 4/5;
+    }
+
+    /* ═══════════════════════════════
+       SECCIÓN 5 · HORARIOS
+    ═══════════════════════════════ */
+    #horarios {
+      padding: var(--pad-v) 0;
+      background: var(--teal);
+      position: relative;
+    }
+    #horarios::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(245,228,213,0.15), transparent);
+    }
+
+    .horarios-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-h);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .horarios-desc {
+      font-family: var(--ff-body);
+      font-size: 0.92rem;
+      color: var(--cream-dim);
+      line-height: 1.85;
+      margin-bottom: 40px;
+    }
+
+    .schedule-table { width: 100%; border-collapse: collapse; }
+    .schedule-table tr { border-bottom: 1px solid rgba(245,228,213,0.08); }
+    .schedule-table tr:last-child { border-bottom: none; }
+    .schedule-table td {
+      padding: 14px 0;
+      font-family: var(--ff-body);
+      font-size: 0.92rem;
+      color: var(--cream);
+    }
+    .schedule-table td:last-child {
+      text-align: right;
+      color: var(--cream-dim);
+    }
+    .schedule-table tr:nth-child(5) td,
+    .schedule-table tr:nth-child(6) td { color: var(--yellow); }
+    .schedule-table tr:nth-child(5) td:last-child,
+    .schedule-table tr:nth-child(6) td:last-child { color: var(--yellow); opacity: 0.85; }
+
+    .schedule-note {
+      margin-top: 24px;
+      font-family: var(--ff-body);
+      font-size: 0.76rem;
+      color: var(--cream-dim);
+      opacity: 0.6;
+      line-height: 1.75;
+    }
+
+    .map-label {
+      font-family: var(--ff-body);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .map-title {
+      font-family: var(--ff-title);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.8rem;
+      color: var(--cream);
+      margin-bottom: 24px;
+    }
+
+    .map-address {
+      font-family: var(--ff-body);
+      font-size: 0.9rem;
+      color: var(--cream-dim);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .map-wrap {
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(245,228,213,0.1);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+    }
+    .map-wrap iframe {
+      width: 100%;
+      height: 340px;
+      display: block;
+      border: none;
+      filter: grayscale(20%) brightness(0.88) saturate(0.75);
+    }
+
+    .map-cta {
+      display: inline-block;
+      margin-top: 16px;
+      font-family: var(--ff-body);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .map-cta:hover { opacity: 0.7; }
+
+    /* ═══════════════════════════════
+       SECCIÓN 6 · EVENTOS
+    ═══════════════════════════════ */
+    #eventos {
+      padding: var(--pad-v) 0;
+    }
+
+    .eventos-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-h);
+    }
+
+    .eventos-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    /* 4-photo mosaic */
+    .eventos-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 300px 300px;
+      gap: 12px;
+      margin-bottom: 56px;
+    }
+
+    .evento-frame { border-radius: 3px; overflow: hidden; }
+    .evento-frame img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease); }
+    .evento-frame:hover img { transform: scale(1.06); }
+
+    .evento-frame:nth-child(1) { grid-column: 1; grid-row: 1; }
+    .evento-frame:nth-child(2) { grid-column: 2 / 4; grid-row: 1; }
+    .evento-frame:nth-child(3) { grid-column: 1 / 3; grid-row: 2; }
+    .evento-frame:nth-child(4) { grid-column: 3; grid-row: 2; }
+
+    .eventos-cta { text-align: center; }
+
+    /* ═══════════════════════════════
+       SECCIÓN 7 · INFO ÚTIL
+    ═══════════════════════════════ */
+    #info {
+      padding: 80px 0;
+      background: var(--teal);
+      border-top: 1px solid rgba(245,228,213,0.1);
+    }
+
+    .info-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-h);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+
+    .info-block { position: relative; padding-left: 20px; }
+    .info-block::before {
+      content: '';
+      position: absolute;
+      top: 4px; left: 0;
+      width: 2px;
+      height: 32px;
+      background: var(--yellow);
+      opacity: 0.5;
+    }
+
+    .info-title {
+      font-family: var(--ff-title);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+
+    .info-text {
+      font-family: var(--ff-body);
+      font-size: 0.88rem;
+      color: var(--cream-dim);
+      line-height: 1.85;
+    }
+
+    /* ═══════════════════════════════
+       SECCIÓN 8 · CTA FINAL
+    ═══════════════════════════════ */
+    #cta-final {
+      padding: 130px var(--pad-h);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #cta-final::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, rgba(232,197,71,0.4));
+    }
+
+    .cta-inner { max-width: 680px; margin: 0 auto; }
+
+    .cta-title {
+      font-family: var(--ff-title);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 22px;
+      letter-spacing: -0.01em;
+    }
+
+    .cta-text {
+      font-family: var(--ff-body);
+      font-size: 0.97rem;
+      color: var(--cream-dim);
+      line-height: 1.85;
+      margin-bottom: 48px;
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ═══════════════════════════════
+       FOOTER
+    ═══════════════════════════════ */
+    footer {
+      background: rgba(0,0,0,0.22);
+      padding: 44px var(--pad-h);
+      text-align: center;
+      border-top: 1px solid rgba(245,228,213,0.06);
+    }
+
+    .footer-logo img {
+      height: 40px;
+      margin: 0 auto 20px;
+      opacity: 0.6;
+    }
+
+    .footer-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(232,197,71,0.3);
+      margin: 0 auto 18px;
+    }
+
+    .footer-text {
+      font-family: var(--ff-body);
+      font-size: 0.76rem;
+      color: var(--cream);
+      opacity: 0.38;
+      line-height: 1.8;
+    }
+
+    /* ═══════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════ */
+    @media (max-width: 1024px) {
+      :root { --pad-h: 32px; }
+
+      .historia-inner { gap: 56px; }
+      .horarios-inner { gap: 56px; }
+    }
+
+    @media (max-width: 900px) {
+      :root { --pad-v: 80px; --pad-h: 28px; }
+
+      .historia-inner,
+      .horarios-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .historia-img { order: -1; aspect-ratio: 16/10; }
+      .historia-img::before { display: none; }
+
+      .cards-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+
+      .info-inner { grid-template-columns: 1fr; gap: 32px; }
+
+      .nav-links { display: none; }
+
+      .eventos-gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 220px 220px;
+      }
+      .evento-frame:nth-child(1) { grid-column: 1; grid-row: 1; }
+      .evento-frame:nth-child(2) { grid-column: 2; grid-row: 1; }
+      .evento-frame:nth-child(3) { grid-column: 1; grid-row: 2; }
+      .evento-frame:nth-child(4) { grid-column: 2; grid-row: 2; }
+    }
+
+    @media (max-width: 600px) {
+      :root { --pad-v: 68px; --pad-h: 20px; }
+
+      #navbar { padding: 18px 20px; }
+      #navbar.scrolled { padding: 13px 20px; }
+
+      .hero-content { padding: 0 20px; }
+      .hero-btns { flex-direction: column; align-items: flex-start; }
+      .scroll-hint { display: none; }
+
+      .cards-grid,
+      .detalles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .eventos-gallery {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+      }
+      .evento-frame:nth-child(n) {
+        grid-column: auto;
+        grid-row: auto;
+        height: 240px;
+      }
+
+      .cta-btns { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══ -->
+  <nav id="navbar">
+    <ul class="nav-links">
+      <li><a href="#historia">Historia</a></li>
+      <li><a href="#experiencia">Experiencia</a></li>
+      <li><a href="#horarios">Horarios</a></li>
+      <li><a href="#eventos">Eventos</a></li>
+    </ul>
+    <a
+      href="https://widget.riservi.com/allies/restaurant-widget/amayta-9k7"
+      target="_blank"
+      rel="noopener"
+      class="btn-yellow"
+    >Reservar</a>
+  </nav>
+
+
+  <!-- ══════════════════════════════════
+       SECCIÓN 1 · HERO
+  ══════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg">
+      <img src="Salón con sillas blancas y mesa larga (hero).jpg" alt="Salón principal de Amayta" />
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-address">Juncal &amp; Quintana &nbsp;·&nbsp; Recoleta</p>
+      <h1 class="hero-title">Amayta</h1>
+      <div class="hero-rule"></div>
+      <p class="hero-desc">
+        Alta gastronomía en un edificio patrimonial centenario de Buenos Aires.
+        Café de autor, pastelería artesanal, almuerzos, cenas y eventos memorables.
+      </p>
+      <div class="hero-btns">
+        <a href="#experiencia" class="btn-yellow">Descubrir la experiencia</a>
+        <a href="#horarios" class="btn-outline"><span>Horarios</span></a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">Scroll</div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       SECCIÓN 2 · HISTORIA
+  ══════════════════════════════════ -->
+  <section id="historia">
+    <div class="historia-inner">
+
+      <div class="historia-body reveal-left">
+        <span class="tag">Nuestra historia</span>
+        <div class="divider"></div>
+        <p>
+          En euskera, <em>Ama</em> significa "madre" y <em>Aita</em>, "padre". Las dos palabras,
+          reunidas en un solo nombre, cuentan la historia de inmigrantes lejos de casa, pero
+          cerca de las tradiciones y dedicados a los grandes placeres de la vida: cocinar, dar
+          de comer y hacer sentir especial a quien se sienta a compartir una mesa.
+        </p>
+        <p>
+          Amayta es nuestra casa, pero fue creada para que también lo sea de quienes se acerquen
+          a habitarla. Ocupa un elegante edificio histórico y centenario (1913) —patrimonio de la
+          Ciudad de Buenos Aires— en la intersección de las calles Juncal y Quintana, en pleno
+          corazón de Recoleta. Fue creada por el arquitecto Luis A. Broggi como residencia
+          familiar, para la cual eligió un exclusivo repertorio de materiales europeos: roble de
+          Eslavonia, mármol de Venecia, granito de Baveno y cerámicas de Estrasburgo, entre otros.
+        </p>
+        <p>
+          Su identidad es multifacética: funciona como cafetería de autor, pastelería francesa,
+          restaurante con servicio de almuerzo y cena, y bar de noche. Cada rincón del local
+          respira una estética sofisticada que dialoga con la ciudad que lo rodea.
+        </p>
+      </div>
+
+      <div class="historia-img reveal-right">
+        <div class="photo-frame">
+          <img src="Barra verde con vitrina de pasteles.jpg" alt="Barra de pastelería de Amayta" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       SECCIÓN 3 · EXPERIENCIA
+  ══════════════════════════════════ -->
+  <section id="experiencia">
+    <div class="section-wrap">
+
+      <div class="exp-header reveal">
+        <h2 class="section-title" style="margin-bottom:16px;">La experiencia Amayta</h2>
+        <div class="divider divider-center"></div>
+        <p class="subtitle">
+          Desde el primer café de la mañana hasta la última copa de la noche,
+          cada momento en Amayta está diseñado para sorprender.
+        </p>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card reveal delay-1">
+          <div class="card-num">01</div>
+          <h3 class="card-title">Desayuno</h3>
+          <p class="card-text">
+            Tenemos desayunos para todos. Los que buscan una pausa, los que buscan
+            energía y los que buscan un lujo antes de empezar el día.
+          </p>
+        </div>
+        <div class="card reveal delay-2">
+          <div class="card-num">02</div>
+          <h3 class="card-title">Pastelería Artesanal</h3>
+          <p class="card-text">
+            Laminados que se deshacen en la boca, mini gâteaux y una vitrina que
+            cambia cada día con creaciones de autor.
+          </p>
+        </div>
+        <div class="card reveal delay-3">
+          <div class="card-num">03</div>
+          <h3 class="card-title">Servicio de Té</h3>
+          <p class="card-text">
+            Regálate una pausa y compártela con quien más quieras. Nuestro servicio
+            de té es la excusa perfecta para desconectar y disfrutar.
+          </p>
+        </div>
+        <div class="card reveal delay-4">
+          <div class="card-num">04</div>
+          <h3 class="card-title">Almuerzo &amp; Cena</h3>
+          <p class="card-text">
+            Platos llenos de sabores en un espacio que transforma la experiencia
+            al caer la tarde.
+          </p>
+        </div>
+      </div>
+
+      <div class="section-cta reveal">
+        <a href="https://qrto.org/gkvgVN" target="_blank" rel="noopener" class="btn-yellow">
+          Ver menú
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       SECCIÓN 4 · DETALLES QUE ENAMORAN
+  ══════════════════════════════════ -->
+  <section id="detalles">
+    <div class="detalles-inner">
+      <div class="detalles-header reveal">
+        <span class="tag">Estética &amp; Ambiente</span>
+        <h2 class="section-title">Un espacio donde los detalles arquitectónicos y el sabor se encuentran</h2>
+      </div>
+      <div class="detalles-grid">
+        <div class="detalle-frame photo-frame reveal delay-1">
+          <img src="Sala íntima con paredes terracota.jpg" alt="Sala íntima de Amayta" style="object-position:center center;" />
+        </div>
+        <div class="detalle-frame photo-frame reveal delay-2">
+          <img src="escaleras.jpg" alt="Escaleras de Amayta" style="object-position:center center;" />
+        </div>
+        <div class="detalle-frame photo-frame reveal delay-3">
+          <img src="entrada.jpg" alt="Entrada de Amayta" style="object-position:center 55%;" />
+        </div>
+        <div class="detalle-frame photo-frame reveal delay-1">
+          <img src="ventana.jpg" alt="Ventana de Amayta" style="object-position:center center;" />
+        </div>
+        <div class="detalle-frame photo-frame reveal delay-2">
+          <img src="baño.jpg" alt="Baño de Amayta" style="object-position:center center;" />
+        </div>
+        <div class="detalle-frame photo-frame reveal delay-3">
+          <img src="Foto azul.jpg" alt="Salón de Amayta" style="object-position:center center;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       SECCIÓN 5 · HORARIOS & UBICACIÓN
+  ══════════════════════════════════ -->
+  <section id="horarios">
+    <div class="horarios-inner">
+
+      <div class="reveal-left">
+        <span class="tag">Cuándo visitarnos</span>
+        <div class="divider"></div>
+        <h2 class="section-title" style="margin-bottom:16px;">Horarios de atención</h2>
+        <p class="horarios-desc">
+          Abierto todos los días de la semana. Los viernes y sábados extendemos
+          nuestro horario para una noche completa.
+        </p>
+        <table class="schedule-table">
+          <tbody>
+            <tr><td>Lunes</td>    <td>07:30 – 00:00</td></tr>
+            <tr><td>Martes</td>   <td>07:30 – 00:00</td></tr>
+            <tr><td>Miércoles</td><td>07:30 – 00:00</td></tr>
+            <tr><td>Jueves</td>   <td>07:30 – 00:00</td></tr>
+            <tr><td>Viernes</td>  <td>07:30 – 01:00 ✦</td></tr>
+            <tr><td>Sábado</td>   <td>09:00 – 01:00 ✦</td></tr>
+            <tr><td>Domingo</td>  <td>09:00 – 00:00</td></tr>
+          </tbody>
+        </table>
+        <p class="schedule-note">
+          ✦ Viernes y sábados con horario extendido hasta la 1:00 AM.
+          Se recomienda reservar con anticipación para cenas y eventos especiales.
+        </p>
+      </div>
+
+      <div class="reveal-right">
+        <p class="map-label">Ubicación</p>
+        <h3 class="map-title">Encontranos en Recoleta</h3>
+        <p class="map-address">
+          Juncal 1207, C1062<br />
+          Ciudad Autónoma de Buenos Aires
+        </p>
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.5!2d-58.38463330000001!3d-34.5926953!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb191698155f%3A0x18231b534c444208!2sAmayta!5e0!3m2!1ses!2sar!4v1"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación de Amayta en Google Maps">
+          </iframe>
+        </div>
+        <a href="https://wa.me/5491132075130" target="_blank" rel="noopener" class="btn-whatsapp" style="margin-top:20px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Consultar por WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       SECCIÓN 6 · EVENTOS
+  ══════════════════════════════════ -->
+  <section id="eventos">
+    <div class="eventos-inner">
+
+      <div class="eventos-header reveal">
+        <span class="tag">Celebraciones</span>
+        <h2 class="section-title" style="margin-bottom:16px;">Eventos en Amayta</h2>
+        <div class="divider divider-center"></div>
+        <p class="subtitle">
+          ¿Buscas el salón perfecto para tu evento? Existe y está en Amayta.
+          Haz de tu celebración una experiencia única y a tu medida.
+        </p>
+      </div>
+
+      <div class="eventos-gallery">
+        <div class="evento-frame reveal delay-1">
+          <img src="Bandeja para eventos.jpg" alt="Eventos en Amayta" />
+        </div>
+        <div class="evento-frame reveal delay-2">
+          <img src="Saala de estar eventos.jpg" alt="Salón de estar para eventos" />
+        </div>
+        <div class="evento-frame reveal delay-1">
+          <img src="evento con explicacion.jpg" alt="Evento en Amayta" />
+        </div>
+        <div class="evento-frame reveal delay-2">
+          <img src="evento givenchy.jpg" alt="Evento Givenchy en Amayta" />
+        </div>
+      </div>
+
+      <div class="eventos-cta reveal">
+        <a href="mailto:amaytaeventos@gmail.com" class="btn-yellow">
+          Escribinos a amaytaeventos@gmail.com
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       SECCIÓN 7 · INFO ÚTIL
+  ══════════════════════════════════ -->
+  <section id="info">
+    <div class="info-inner">
+
+      <div class="info-block reveal delay-1">
+        <span class="tag">Dónde encontrarnos</span>
+        <h3 class="info-title">Dirección</h3>
+        <p class="info-text">
+          Juncal 1207, C1062<br />
+          Ciudad Autónoma de Buenos Aires
+        </p>
+      </div>
+
+      <div class="info-block reveal delay-2">
+        <span class="tag">Para todos</span>
+        <h3 class="info-title">Opciones especiales</h3>
+        <p class="info-text">
+          Contamos con opciones sin gluten y veganas para que todos puedan
+          disfrutar de la experiencia Amayta.
+        </p>
+      </div>
+
+      <div class="info-block reveal delay-3">
+        <span class="tag">Reservas</span>
+        <h3 class="info-title">Reservá tu lugar</h3>
+        <p class="info-text">
+          Para almuerzos, meriendas, cenas y ocasiones especiales recomendamos reservar
+          con anticipación a través de nuestro sistema online.
+        </p>
+        <br />
+        <a
+          href="https://widget.riservi.com/allies/restaurant-widget/amayta-9k7"
+          target="_blank"
+          rel="noopener"
+          class="btn-yellow"
+          style="font-size:0.72rem; padding:12px 22px;"
+        >Reservar mesa</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       SECCIÓN 8 · CTA FINAL
+  ══════════════════════════════════ -->
+  <section id="cta-final">
+    <div class="cta-inner reveal">
+      <h2 class="cta-title">¿Listo para vivir la experiencia Amayta?</h2>
+      <div class="divider divider-center"></div>
+      <p class="cta-text">
+        Reservá tu mesa y descubrí por qué somos una de las propuestas
+        gastronómicas más destacadas de Buenos Aires.
+      </p>
+      <div class="cta-btns">
+        <a
+          href="https://widget.riservi.com/allies/restaurant-widget/amayta-9k7"
+          target="_blank"
+          rel="noopener"
+          class="btn-yellow"
+        >Reservar mesa</a>
+        <a
+          href="https://www.google.com/maps/search/Amayta,+Juncal+1207,+C1062+Ciudad+Aut%C3%B3noma+de+Buenos+Aires"
+          target="_blank"
+          rel="noopener"
+          class="btn-outline"
+        ><span>Cómo llegar</span></a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="footer-logo">
+      <img src="Logo amayta.avif" alt="Amayta" />
+    </div>
+    <div class="footer-divider"></div>
+    <p class="footer-text">
+      Juncal 1207, Recoleta &nbsp;·&nbsp; Buenos Aires
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      Amaytaeventos@gmail.com
+    </p>
+  </footer>
+
+
+  <script>
+    /* Navbar scroll */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    /* Reveal on scroll */
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
